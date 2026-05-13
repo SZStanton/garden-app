@@ -1,36 +1,46 @@
-// User Prompt for the growing season and 'cancel' error handling
-let season = prompt(
-  'Which season are you growing your plant in?',
-).toLowerCase();
-season = season ? season.toLowerCase() : ''; // Avoids crash if user clicks cancel
+// Function for User Prompts
+function getUserInput(message) {
+  let input = prompt(message);
 
-// User Prompt for the plant type and 'cancel' error handling
-let plantType = prompt(
+  // Avoids crash if user clicks cancel
+  return input ? input.toLowerCase() : '';
+}
+
+// Function provides advice based on the season
+function getSeasonAdvice(season) {
+  if (season === 'summer') {
+    return 'Water your plants regularly and provide some shade.\n';
+  } else if (season === 'winter') {
+    return 'Protect your plants from frost with covers.\n';
+  } else {
+    return 'No advice for this season.\n';
+  }
+}
+
+// Function provides advice based on the plant type
+function getPlantAdvice(plantType) {
+  if (plantType === 'flower' || plantType === 'flowers') {
+    return 'Use fertiliser to encourage blooms.';
+  } else if (plantType === 'vegetable' || plantType === 'vegetables') {
+    return 'Keep an eye out for pests!';
+  } else {
+    return 'No advice for this type of plant.';
+  }
+}
+
+// User Prompt for the growing season
+let season = getUserInput('Which season are you growing your plant in?');
+
+// User Prompt for the plant type
+let plantType = getUserInput(
   'Are you asking about a flower, a vegetable or other?',
-).toLowerCase();
-plantType = plantType ? plantType.toLowerCase() : '';
+);
 
-// Stores gardening advice
+// Combines all gardening advice
 let advice = '';
+advice += getSeasonAdvice(season);
+advice += getPlantAdvice(plantType);
 
-// Adds advice based on the season user enters
-if (season === 'summer') {
-  advice += 'Water your plants regularly and provide some shade.\n';
-} else if (season === 'winter') {
-  advice += 'Protect your plants from frost with covers.\n';
-} else {
-  advice += 'No advice for this season.\n';
-}
-
-// Adds advice based on the plant type user enters
-if (plantType === 'flower') {
-  advice += 'Use fertiliser to encourage blooms.';
-} else if (plantType === 'vegetable') {
-  advice += 'Keep an eye out for pests!';
-} else {
-  advice += 'No advice for this type of plant.';
-}
-
-// Display the final gardening advise to user
+// Display the final gardening advice
 console.log(advice);
 
